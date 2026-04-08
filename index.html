@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rive Wheel - Inviva</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            overflow: hidden; 
+        }
+
+        #canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+  </head>
+  <body>
+    
+    <canvas id="canvas"></canvas>
+
+    <script src="https://unpkg.com/@rive-app/webgl2"></script>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+
+        const r = new rive.Rive({
+            src: "ramblers.riv",
+            artboard: "Artboard",
+            canvas: canvas,
+            autoBind: true,
+            autoplay: true,
+            stateMachines: "State Machine 1",
+            enableWebAudio: true,
+            layout: new rive.Layout({
+                fit: rive.Fit.Contain,
+                alignment: rive.Alignment.Center
+            }),
+            onLoad: () => {
+                r.resizeDrawingSurfaceToCanvas(); 
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            r.resizeDrawingSurfaceToCanvas();
+        });
+
+    </script>
+  </body>
+</html>
