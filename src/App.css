@@ -1,0 +1,114 @@
+/* src/App.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a;
+  color: #F3931B; 
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+/* The outer container that centers the phone on your monitor */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000; /* Dark background outside the phone */
+}
+
+.app-container {
+  /* This is the magic: 9:16 vibe */
+  width: 100%;
+  max-width: 430px; /* Typical width of a large iPhone */
+  height: 95vh;     /* Keeps it slightly off the top/bottom of your browser */
+  
+  background-color: #1a1a1a;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  
+  /* Make it look like a physical device on desktop */
+  border-radius: 40px; 
+  border: 8px solid #333;
+  box-shadow: 0 0 50px rgba(0,0,0,0.8);
+  overflow: hidden; /* Clips your content to the rounded corners */
+}
+
+/* RESPONSIVE: On an actual phone, remove the borders and fill the screen */
+@media (max-width: 500px) {
+  #root {
+    background-color: #1a1a1a;
+  }
+  .app-container {
+    max-width: 100%;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+  }
+}
+
+.full-screen-rive {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 70px);
+  overflow: hidden;
+}
+
+.main-content {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  text-align: center; 
+  padding: 0 24px;
+  box-sizing: border-box;
+  
+  overflow-y: auto;
+}
+
+h1 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 40px;
+}
+
+.footer {
+  position: absolute; 
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #222;
+  border-top: 1px solid #444;
+  z-index: 1000;
+}
+
+.footer-button {
+  color: #888;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer-button.active {
+  color: #F3931B;
+}
+
+.footer-button:hover {
+  color: #ffffff;
+}
