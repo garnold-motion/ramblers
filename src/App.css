@@ -3,12 +3,12 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #000;
+  background-color: #1a1a1a; 
   color: #F3931B;
-  overflow: hidden; /* Stops the bounce */
+  overflow: hidden;
   height: 100%;
   width: 100%;
-  position: fixed; /* The 'Straitjacket' - stops pull-to-refresh */
+  position: fixed;
 }
 
 /* The outer container that centers the phone on your monitor */
@@ -18,6 +18,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #1a1a1a; 
 }
 
 .app-container {
@@ -90,20 +91,18 @@ h1 {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 11px; /* Slightly smaller for that sleek look */
+  font-size: 11px;
   font-weight: bold;
   text-transform: uppercase;
-  transition: color 0.2s ease;
+  transition: color 0.1s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0; /* Remove padding that might push it up */
+  padding: 0;
+  -webkit-tap-highlight-color: transparent; 
 }
 
-.footer-button.active {
-  color: #F3931B;
-}
-
-.footer-button:hover {
-  color: #ffffff;
+.footer-button.active,
+.footer-button:active {
+  color: #F3931B !important;
 }
