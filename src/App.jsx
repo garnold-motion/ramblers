@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Footer from './components/Footer';
 import Specials from './components/Specials'; // <--- Import the new brick
+import Menu from './components/Menu'; // <--- Import the new brick
 import './App.css';
 
 function App() {
@@ -9,9 +10,9 @@ function App() {
   const renderContent = () => {
     switch (activeTab) {
       case 'specials': 
-        return <Specials />; // <--- Use the component here
+        return <Specials/>; // <--- Use the component here
       case 'menu':     
-        return <div><h1>Our Taps</h1><p>Fetching from Google...</p></div>;
+        return <Menu/>; // <--- Use the component here
       case 'game':     
         return <div><h1>Pint Pourer</h1><p>Rive Game incoming.</p></div>;
       case 'quiz':     
@@ -19,7 +20,7 @@ function App() {
       case 'join':     
         return <div><h1>Join the Crew</h1><p>Sign up here.</p></div>;
       default:         
-        return <Specials />;
+        return <Specials/>;
     }
   };
 
