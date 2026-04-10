@@ -3,7 +3,7 @@ import { useRive, Layout, Fit, Alignment } from '@rive-app/react-canvas';
 
 const Specials = () => {
   const { RiveComponent } = useRive({
-    src: '/ramblers_specials.riv',
+    src: 'ramblers_specials.riv',
     artboard: 'Artboard',
     stateMachines: 'State Machine 1',
     autoplay: true,

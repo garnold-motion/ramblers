@@ -37,14 +37,11 @@ body {
   overflow: hidden; /* Clips your content to the rounded corners */
 }
 
-/* RESPONSIVE: On an actual phone, remove the borders and fill the screen */
+
 @media (max-width: 500px) {
-  #root {
-    background-color: #1a1a1a;
-  }
   .app-container {
     max-width: 100%;
-    height: 100vh;
+    height: 100dvh; 
     border: none;
     border-radius: 0;
   }
@@ -77,11 +74,13 @@ h1 {
 }
 
 .footer {
-  position: absolute; 
+  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  padding-bottom: env(safe-area-inset-bottom); 
+  height: auto; 
+  min-height: 70px;
   display: flex;
   justify-content: space-around;
   align-items: center;
