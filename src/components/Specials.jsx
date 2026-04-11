@@ -9,7 +9,7 @@ const Specials = () => {
     autoplay: true,
     layout: new Layout({
       fit: Fit.Cover, 
-      alignment: Alignment.TopCenter,
+      alignment: Alignment.Center,
     }),
   });
 

@@ -4,22 +4,21 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #1a1a1a; 
+  background-color: #222; 
   color: #F3931B;
-  overflow: hidden;
+  overscroll-behavior: none; 
   height: 100%;
   width: 100%;
-  position: fixed;
+  position: fixed; 
+  overflow: hidden;
 }
 
-/* The outer container that centers the phone on your monitor */
 #root {
   width: 100%;
-  height: 100%;
+  height: 100svh; 
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1a1a1a; 
 }
 
 .app-container {
@@ -53,11 +52,11 @@ html, body {
   width: 100%;
   height: 100%; 
   overflow: hidden;
-  z-index: 1; 
+  z-index: 0; 
 }
 
 .main-content {
-  position: relative;
+  /* 1. REMOVE `position: relative;` from here */
   flex: 1;
   width: 100%;
   padding: 0;
@@ -77,8 +76,9 @@ h1 {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px; 
-  padding-bottom: env(safe-area-inset-bottom); 
+  height: 60px;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: content-box; 
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -99,11 +99,39 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0;
+  flex: 1;
+  height: 100%;
+  justify-content: center;
+  padding: 0; 
   -webkit-tap-highlight-color: transparent; 
 }
 
 .footer-button.active,
 .footer-button:active {
   color: #F3931B !important;
+}
+
+.app-header {
+  width: 100%;
+  background-color: #222;
+  padding-top: env(safe-area-inset-top); 
+  margin-top: -1px; 
+  padding-top: calc(env(safe-area-inset-top) + 1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  border-bottom: 2px solid #333;
+}
+
+.header-mockup {
+  height: 25px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F3931B;
+  font-weight: 900;
+  letter-spacing: 4px;
+  position: relative;
+  top: -5px; /* Positive numbers move it DOWN. Negative (e.g., -2px) move it UP. */
 }

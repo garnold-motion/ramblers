@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import Footer from './components/Footer';
-import Specials from './components/Specials'; // <--- Import the new brick
-import Menu from './components/Menu'; // <--- Import the new brick
+import Specials from './components/Specials';
+import Menu from './components/Menu';
+import Header from './components/Header';
+
 import './App.css';
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
 
   return (
     <div className="app-container">
+      <Header />
+
       <main className="main-content">
         {renderContent()}
       </main>
@@ -33,6 +37,7 @@ function App() {
       <Footer activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
+
 }
 
 export default App;
