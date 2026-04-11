@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        ramblers: '#F3931B', // This lets you use 'text-ramblers' in your code!
+        ramblers: '#F3931B',
       },
     },
   },
