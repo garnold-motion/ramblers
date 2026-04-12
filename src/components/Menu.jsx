@@ -21,7 +21,7 @@ const Menu = ({ beers, isLoading }) => {
               <div className="text-left pr-4">
                 <h2 className="text-white font-bold text-lg uppercase leading-tight">{beer.name}</h2>
                 <p className="text-[#F3931B] text-xs font-bold uppercase tracking-wide mb-1">{beer.style}</p>
-                <p className="text-gray-400 text-xs leading-relaxed max-w-[220px]">{beer.desc}</p>
+                <p className="text-gray-400 text-xs leading-relaxed max-w-[220px]">{beer.short_desc}</p>
               </div>
               <div className="bg-[#1a1a1a] px-2 py-1 rounded border border-gray-700 flex-shrink-0 mt-1">
                 <span className="text-white font-mono text-xs">{beer.abv}</span>

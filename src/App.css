@@ -35,7 +35,6 @@ html, body {
   overflow: hidden;
 }
 
-
 @media (max-width: 500px) {
   .app-container {
     max-width: 100%;
@@ -56,82 +55,10 @@ html, body {
 }
 
 .main-content {
-  /* 1. REMOVE `position: relative;` from here */
   flex: 1;
   width: 100%;
   padding: 0;
   overflow-y: auto;
   padding-bottom: 80px;
   text-align: center; 
-}
-
-h1 {
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: 40px;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  padding-bottom: env(safe-area-inset-bottom);
-  box-sizing: content-box; 
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: #222;
-  border-top: 1px solid #444;
-  z-index: 1000;
-}
-
-.footer-button {
-  color: #888;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: color 0.1s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-  height: 100%;
-  justify-content: center;
-  padding: 0; 
-  -webkit-tap-highlight-color: transparent; 
-}
-
-.footer-button.active,
-.footer-button:active {
-  color: #F3931B !important;
-}
-
-.app-header {
-  width: 100%;
-  background-color: #222;
-  padding-top: env(safe-area-inset-top); 
-  margin-top: -1px; 
-  padding-top: calc(env(safe-area-inset-top) + 1px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  border-bottom: 2px solid #333;
-}
-
-.header-mockup {
-  height: 25px; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #F3931B;
-  font-weight: 900;
-  letter-spacing: 4px;
-  position: relative;
-  top: -5px; /* Positive numbers move it DOWN. Negative (e.g., -2px) move it UP. */
 }
