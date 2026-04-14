@@ -17,9 +17,9 @@ function computeMatchScore(userPrefs, beerChars) {
   return 1 - totalDiff / maxDiff;
 }
 
-const Menu = ({ beers, isLoading }) => {
+const Menu = ({ beers, isLoading, selectedBeer, setSelectedBeer }) => {
   const [showFilters, setShowFilters] = useState(false);
-  const [selectedBeer, setSelectedBeer] = useState(null);
+  
   const [sliders, setSliders] = useState({
     bitterness: 3,
     hoppiness: 3,

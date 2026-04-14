@@ -1,5 +1,5 @@
 const Footer = ({ activeTab, setActiveTab }) => {
-  const tabs = ['Specials', 'Menu', 'Quiz', 'Game', 'Join'];
+  const tabs = ['Whats On', 'Menu', 'Quiz', 'Game', 'Join'];
 
   return (
     <footer className="absolute bottom-0 left-0 w-full h-[60px] pb-[env(safe-area-inset-bottom)] box-content flex justify-around items-center bg-[#222] border-t border-[#444] z-[1000]">
