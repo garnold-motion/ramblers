@@ -1,3 +1,4 @@
+// src/App.jsx
 import { useState, useEffect } from 'react';
 import Papa from 'papaparse'; 
 import Footer from './components/Footer';
@@ -11,8 +12,6 @@ function App() {
   const [activeTab, setActiveTab] = useState('whats on');
   const [beers, setBeers] = useState([]);
   const [isMenuLoading, setIsMenuLoading] = useState(true);
-  
-  // NEW: Lifted state so all tabs can open a beer overlay
   const [selectedBeer, setSelectedBeer] = useState(null);
 
   useEffect(() => {
@@ -43,17 +42,15 @@ function App() {
   const renderContent = () => {
     switch (activeTab) {
       case 'whats on': 
-        // Pass setSelectedBeer down to Specials
         return <Specials setActiveTab={setActiveTab} beers={beers} setSelectedBeer={setSelectedBeer} />;
       case 'menu':     
-        // Pass selectedBeer and setSelectedBeer down to Menu
         return <Menu beers={beers} isLoading={isMenuLoading} selectedBeer={selectedBeer} setSelectedBeer={setSelectedBeer} />; 
       case 'game':     
-        return <div><h1>Pint Pourer</h1><p>Rive Game incoming.</p></div>;
+        return <div><h1 className="mt-20">Pint Pourer</h1><p>Rive Game incoming.</p></div>;
       case 'quiz':     
-        return <div><h1>Beer Quiz</h1><p>Test your knowledge.</p></div>;
+        return <div><h1 className="mt-20">Beer Quiz</h1><p>Test your knowledge.</p></div>;
       case 'join':     
-        return <div><h1>Join the Crew</h1><p>Sign up here.</p></div>;
+        return <div><h1 className="mt-20">Join the Crew</h1><p>Sign up here.</p></div>;
       default:         
         return <Specials setActiveTab={setActiveTab} beers={beers} setSelectedBeer={setSelectedBeer} />;
     }
@@ -63,7 +60,10 @@ function App() {
     <div className="app-container">
       <Header />
       <main className="main-content">
-        {renderContent()}
+        {/* The content-wrapper keeps things centered on larger screens */}
+        <div className="content-wrapper">
+          {renderContent()}
+        </div>
       </main>
       <Footer activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>

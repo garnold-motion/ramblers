@@ -1,11 +1,13 @@
 // src/components/Header.jsx
 
-
 const Header = () => {
   return (
-    <header className="w-full bg-[#222] flex items-center justify-center border-b-2 border-[#333] pt-[env(safe-area-inset-top)]">
-      <div className="h-[25px] flex items-center justify-center text-[#F3931B] font-black tracking-[4px]">
-        RAMBLERS ALE WORKS
+    <header className="fixed top-0 left-0 w-full z-[1000] bg-[#222]/80 backdrop-blur-md border-b border-white/5">
+      {/* Container keeps the logo centered even on huge screens */}
+      <div className="max-w-screen-xl mx-auto h-16 flex items-center justify-center px-4">
+        <h1 className="text-[#F3931B] font-black tracking-[4px] text-sm sm:text-base md:text-lg">
+          RAMBLERS ALE WORKS
+        </h1>
       </div>
     </header>
   );
