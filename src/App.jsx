@@ -6,6 +6,8 @@ import Specials from './components/Specials';
 import Menu from './components/Menu';
 import Header from './components/Header';
 import Quiz from './components/Quiz';
+import Join from './components/Join';
+import Game from './components/Game';
 
 import './App.css';
 
@@ -47,12 +49,11 @@ function App() {
       case 'menu':     
         return <Menu beers={beers} isLoading={isMenuLoading} selectedBeer={selectedBeer} setSelectedBeer={setSelectedBeer} />; 
       case 'game':     
-        return <div><h1 className="mt-20">Pint Pourer</h1><p>Rive Game incoming.</p></div>;
+        return <Game />; 
       case 'quiz':     
-        // Loads your new Quiz component
         return <Quiz />; 
       case 'join':     
-        return <div><h1 className="mt-20">Join the Crew</h1><p>Sign up here.</p></div>;
+        return <Join />; 
       default:         
         return <Specials setActiveTab={setActiveTab} beers={beers} setSelectedBeer={setSelectedBeer} />;
     }
