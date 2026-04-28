@@ -1,6 +1,10 @@
 /* src/App.css */
 @import "tailwindcss";
 
+@theme {
+  --color-brand-org-1: #F3931B;
+}
+
 :root {
   --header-height: 64px;
   --footer-height: 80px;

@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Specials from './components/Specials';
 import Menu from './components/Menu';
 import Header from './components/Header';
+import Quiz from './components/Quiz';
 
 import './App.css';
 
@@ -48,7 +49,8 @@ function App() {
       case 'game':     
         return <div><h1 className="mt-20">Pint Pourer</h1><p>Rive Game incoming.</p></div>;
       case 'quiz':     
-        return <div><h1 className="mt-20">Beer Quiz</h1><p>Test your knowledge.</p></div>;
+        // Loads your new Quiz component
+        return <Quiz />; 
       case 'join':     
         return <div><h1 className="mt-20">Join the Crew</h1><p>Sign up here.</p></div>;
       default:         
