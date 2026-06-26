@@ -12,7 +12,6 @@ export default function QuestionCard({
   const [selected, setSelected] = useState(null);
   const [revealed, setRevealed] = useState(false);
 
-  const isTrueFalse = question.type === "tf";
   const options = question.options;
   const correctIndex = question.answer;
 
@@ -72,8 +71,8 @@ export default function QuestionCard({
           {question.q}
         </h2>
 
-        {/* Options Grid - scrolls if the screen is tiny, but usually static */}
-        <div className={`grid gap-2 ${isTrueFalse ? "grid-cols-2" : "grid-cols-1"} relative z-10 shrink-0`}>
+        {/* Options Grid */}
+        <div className="grid gap-2 grid-cols-1 relative z-10 shrink-0">
           {options.map((option, index) => {
             const isThis = selected === index;
             const isCorrectOption = index === correctIndex;
@@ -103,11 +102,9 @@ export default function QuestionCard({
                 // Reduced padding (p-3) to save vertical space
                 className={`flex items-center gap-3 p-3 rounded-2xl transition-all duration-300 text-left active:scale-[0.98] ${optionStyle}`}
               >
-                {!isTrueFalse && (
-                  <span className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black shrink-0 transition-colors ${letterStyle}`}>
-                    {String.fromCharCode(65 + index)}
-                  </span>
-                )}
+                <span className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black shrink-0 transition-colors ${letterStyle}`}>
+                  {String.fromCharCode(65 + index)}
+                </span>
                 <span className="flex-1 text-sm font-semibold">{option}</span>
                 
                 {revealed && isCorrectOption && <CheckCircle2 size={16} className="text-green-400 shrink-0" />}

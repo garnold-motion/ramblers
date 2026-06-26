@@ -1,6 +1,6 @@
 // src/App.jsx
-import { useState, useEffect } from 'react';
-import Papa from 'papaparse'; 
+
+import { useState } from 'react';
 import Footer from './components/Footer';
 import Specials from './components/Specials';
 import Menu from './components/Menu';
@@ -8,62 +8,79 @@ import Header from './components/Header';
 import Quiz from './components/Quiz';
 import Join from './components/Join';
 import Game from './components/Game';
+import { useSheetData } from './hooks/useSheetData';
+import { SHEET_URLS } from './config/sheets';
 
 import './App.css';
 
+const transformBeers = (rows) => rows.filter(b => b.name && b.name.trim() !== "");
+const transformFood = (rows) => rows.filter(f => f.name && f.name.trim() !== "");
+
 function App() {
   const [activeTab, setActiveTab] = useState('whats on');
-  const [beers, setBeers] = useState([]);
-  const [isMenuLoading, setIsMenuLoading] = useState(true);
   const [selectedBeer, setSelectedBeer] = useState(null);
+  const [menuCategory, setMenuCategory] = useState('beers');
 
-  useEffect(() => {
-    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTV2u2qZRaxVYdmuUljK4VG8ay4eECd6DFXB2fy0o0BIq65-XakEXTz7_GvxpCWpEctIW9FIiSVJ3l/pub?gid=0&single=true&output=csv";
-    
-    const cachedBeers = localStorage.getItem('ramblers_beer_cache');
-    if (cachedBeers) {
-      setBeers(JSON.parse(cachedBeers));
-      setIsMenuLoading(false);
-    }
+  const {
+    data: beers,
+    isLoading: isBeersLoading,
+    error: beersError,
+  } = useSheetData(SHEET_URLS.beers, 'ramblers_beers_v1', transformBeers);
 
-    Papa.parse(sheetURL, {
-      download: true,
-      header: true,
-      complete: (results) => {
-        const validBeers = results.data.filter(beer => beer.name && beer.name.trim() !== "");
-        setBeers(validBeers); 
-        setIsMenuLoading(false); 
-        localStorage.setItem('ramblers_beer_cache', JSON.stringify(validBeers));
-      },
-      error: (error) => {
-        console.error("Error fetching tap list:", error);
-        if (!cachedBeers) setIsMenuLoading(false); 
-      }
-    });
-  }, []);
+  const {
+    data: food,
+    isLoading: isFoodLoading,
+    error: foodError,
+  } = useSheetData(SHEET_URLS.food, 'ramblers_food_v1', transformFood);
+
+  const isMenuLoading = isBeersLoading || isFoodLoading;
+
+  const menuError =
+    (beersError && beers.length === 0) || (foodError && food.length === 0);
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'whats on': 
+      case 'whats on':
         return <Specials setActiveTab={setActiveTab} beers={beers} setSelectedBeer={setSelectedBeer} />;
-      case 'menu':     
-        return <Menu beers={beers} isLoading={isMenuLoading} selectedBeer={selectedBeer} setSelectedBeer={setSelectedBeer} />; 
-      case 'game':     
-        return <Game />; 
-      case 'quiz':     
-        return <Quiz />; 
-      case 'join':     
-        return <Join />; 
-      default:         
+      case 'menu':
+        if (menuError) {
+          return (
+            <div className="flex flex-col items-center justify-center h-full text-center px-6 py-20 gap-2">
+              <p className="text-brand-org-1 font-black uppercase tracking-widest text-sm">
+                Couldn't load the menu
+              </p>
+              <p className="text-gray-500 text-xs">
+                Check your connection and try again shortly.
+              </p>
+            </div>
+          );
+        }
+        return (
+          <Menu
+            beers={beers}
+            food={food}
+            isLoading={isMenuLoading}
+            selectedBeer={selectedBeer}
+            setSelectedBeer={setSelectedBeer}
+            menuCategory={menuCategory}
+          />
+        );
+      case 'game':
+        return <Game />;
+      case 'quiz':
+        return <Quiz />;
+      case 'join':
+        return <Join />;
+      default:
         return <Specials setActiveTab={setActiveTab} beers={beers} setSelectedBeer={setSelectedBeer} />;
     }
   };
 
   return (
     <div className="app-container">
-      <Header />
+      <Header activeTab={activeTab} menuCategory={menuCategory} setMenuCategory={setMenuCategory} />
+
       <main className="main-content">
-        {/* The content-wrapper keeps things centered on larger screens */}
         <div className="content-wrapper">
           {renderContent()}
         </div>

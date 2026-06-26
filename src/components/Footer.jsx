@@ -1,5 +1,5 @@
 // src/components/Footer.jsx
-import { Calendar, Beer, Trophy, Gamepad2, UserPlus, BeerIcon, BeerOff } from 'lucide-react';
+import { Calendar, Beer, Trophy, Gamepad2, UserPlus } from 'lucide-react';
 
 const Footer = ({ activeTab, setActiveTab }) => {
   const tabs = [
@@ -12,7 +12,6 @@ const Footer = ({ activeTab, setActiveTab }) => {
 
   return (
     <footer className="fixed bottom-0 left-0 w-full bg-[#222]/95 backdrop-blur-md border-t border-white/5 z-[1000] pb-[env(safe-area-inset-bottom)]">
-      {/* This container ensures the footer content looks good on Tablets/Desktops */}
       <div className="max-w-md mx-auto flex justify-around items-center h-16">
         {tabs.map((tab) => {
           const Icon = tab.icon;

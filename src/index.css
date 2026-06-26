@@ -1,1 +1,32 @@
+@import "tailwindcss";
 
+@theme {
+  --color-brand-org-1: #F3931B;
+  
+  --spacing-header: 64px;
+  --spacing-footer: 80px;
+}
+
+@layer base {
+  :root {
+    --header-height: 64px;
+    --footer-height: 80px;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    color: #F3931B;
+    overscroll-behavior-y: none;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
+  }
+}
