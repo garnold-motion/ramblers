@@ -2,26 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { useSheetData } from '../hooks/useSheetData';
 import { SHEET_URLS } from '../config/sheets';
-
-const dayMap = {
-  'sunday': 0, 'monday': 1, 'tuesday': 2, 'wednesday': 3,
-  'thursday': 4, 'friday': 5, 'saturday': 6
-};
-
-const transformSpecials = (rows) =>
-  rows
-    .filter(row => row.Day && row.Title)
-    .map(row => ({
-      day: row.Day,
-      title: row.Title,
-      desc: row.Desc,
-      dayId: dayMap[row.Day.toLowerCase().trim()] ?? 0
-    }))
-    .sort((a, b) => {
-      const valA = a.dayId === 0 ? 7 : a.dayId;
-      const valB = b.dayId === 0 ? 7 : b.dayId;
-      return valA - valB;
-    });
+import { transformSpecials } from '../data/transforms';
 
 const Specials = ({ setActiveTab, beers = [], setSelectedBeer }) => {
   const scrollRef = useRef(null);

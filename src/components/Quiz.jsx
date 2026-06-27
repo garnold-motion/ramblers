@@ -6,45 +6,28 @@ import QuestionCard from "./quiz/QuestionCard";
 import ResultsScreen from "./quiz/ResultsScreen";
 import { useSheetData } from "../hooks/useSheetData";
 import { SHEET_URLS } from "../config/sheets";
+import { transformQuizQuestions } from "../data/transforms";
+import { shuffleArray } from "../utils/shuffleArray";
 
 const QUIZ_SIZE = 10;
+const RAMBLERS_COUNT = 3;
 
-const shuffleArray = (array) => {
-  const newArray = [...array];
-  for (let i = newArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+const buildQuizSet = (allQuestions) => {
+  const ramblersPool = allQuestions.filter(q => q.category === "Ramblers");
+  const generalPool = allQuestions.filter(q => q.category !== "Ramblers");
+
+  const ramblersPick = shuffleArray(ramblersPool).slice(0, RAMBLERS_COUNT);
+  const remainingSlots = QUIZ_SIZE - ramblersPick.length;
+  const generalPick = shuffleArray(generalPool).slice(0, remainingSlots);
+
+  let combined = [...ramblersPick, ...generalPick];
+  if (combined.length < Math.min(QUIZ_SIZE, allQuestions.length)) {
+    const usedIds = new Set(combined.map(q => q.id));
+    const leftovers = shuffleArray(allQuestions.filter(q => !usedIds.has(q.id)));
+    combined = combined.concat(leftovers.slice(0, QUIZ_SIZE - combined.length));
   }
-  return newArray;
-};
 
-const transformQuizQuestions = (rows) => {
-  const validQuestions = rows.filter(q => q.Question && q.Question.trim() !== "");
-
-  return validQuestions.map((q, index) => {
-    const originalOptions = [
-      q["Option A"],
-      q["Option B"],
-      q["Option C"],
-      q["Option D"]
-    ].filter(val => val !== undefined && val !== "");
-
-    const correctLetter = q["Correct Answer"];
-
-    const letterMap = { "A": 0, "B": 1, "C": 2, "D": 3 };
-    const correctText = originalOptions[letterMap[correctLetter]];
-    const shuffledOptions = shuffleArray(originalOptions);
-    const newCorrectIndex = shuffledOptions.indexOf(correctText);
-
-    return {
-      id: index,
-      q: q.Question,
-      type: "mc",
-      options: shuffledOptions,
-      answer: newCorrectIndex,
-      fact: q["Did You Know? (Fact)"]
-    };
-  });
+  return shuffleArray(combined);
 };
 
 export default function Quiz() {
@@ -56,12 +39,11 @@ export default function Quiz() {
   const {
     data: allQuestions,
     isLoading,
-  } = useSheetData(SHEET_URLS.quiz, "ramblers_quiz_v3", transformQuizQuestions);
+  } = useSheetData(SHEET_URLS.quiz, "ramblers_quiz_v4", transformQuizQuestions);
 
   const startQuiz = useCallback(() => {
     if (allQuestions.length === 0) return;
-    const shuffled = shuffleArray(allQuestions);
-    setActiveQuestions(shuffled.slice(0, Math.min(QUIZ_SIZE, shuffled.length)));
+    setActiveQuestions(buildQuizSet(allQuestions));
     setCurrentIndex(0);
     setScore(0);
     setPhase("quiz");

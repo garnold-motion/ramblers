@@ -4,12 +4,10 @@ import { SlidersHorizontal, X, MoveHorizontal } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import { useSheetData } from '../hooks/useSheetData';
 import { SHEET_URLS } from '../config/sheets';
+import { transformWine } from '../data/transforms';
 
 // Preferred display order for food categories; anything else gets appended at the end
 const FOOD_CATEGORY_ORDER = ['Burgers', 'Bowls', 'Loaded Fries', 'Sides', 'Share Plates', 'Mains', 'Kids'];
-
-const transformWine = (rows) =>
-  rows.filter(w => w.name && w.name.trim() !== "" && w.is_available?.toUpperCase() === 'TRUE');
 
 function computeMatchScore(userPrefs, beerChars) {
   const keys = Object.keys(userPrefs);
